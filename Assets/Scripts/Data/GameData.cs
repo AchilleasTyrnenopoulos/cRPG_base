@@ -15,6 +15,13 @@ public class GameData : MonoBehaviour
     public bool cameraLockedOnTarget = false;
     public List<GameObject> companions = new List<GameObject>();
 
+    [Header("Date & Time")]
+    public int days = -1;
+    [Range(0, 23)]
+    public int hour = 0;
+    [Range(0, 59)]
+    public int minute = 0;
+
     private void Awake()
     {
         if (instance == null)

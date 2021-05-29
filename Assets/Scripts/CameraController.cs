@@ -66,7 +66,8 @@ public class CameraController : MonoBehaviour
     {
         //transform.rotation = Quaternion.Lerp(transform.rotation, currentRotation, Time.deltaTime * speed);
         //keep camera height relevant to target
-        AdjustCameraHeight();
+        if(target)
+            AdjustCameraHeight();
         
         
 

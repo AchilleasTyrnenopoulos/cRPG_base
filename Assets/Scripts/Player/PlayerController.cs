@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector3 pos, float agentStopDistance)
     {
         agent.stoppingDistance = agentStopDistance;
-        agent.SetDestination(pos);
+        agent.SetDestination(pos);        
     }
     public void Move(GameObject target, float agentStopDistance)
     {
@@ -141,6 +141,11 @@ public class PlayerController : MonoBehaviour
                         print(clickPos);
 
                         Move(clickPos, 0f);
+                        break;
+                    case "Companion":
+                        target = hitCollider.transform.parent.gameObject;
+                        print(target.name);
+                        Move(target);
                         break;
                     case "NPC":
                         target = hitCollider.gameObject;

@@ -42,7 +42,7 @@ public class SceneTransitionTrigger : MonoBehaviour
         //check if this transition is currently the selected target
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Companion"))
         {
-            if(other.gameObject.GetComponent<PlayerController>().target == this.gameObject)
+            if(PlayersSquadController.instance.selectedPlayer.GetComponent<PlayerController>().target == this.gameObject)
             {
                 //EventManager.instance.OnSceneTransitionEnter();
                 SceneTransition();

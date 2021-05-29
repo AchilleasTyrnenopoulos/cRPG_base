@@ -68,7 +68,7 @@ public class PlayersSquadController : MonoBehaviour
             }
         }
 
-        GameObject nextSelected = new GameObject();
+        GameObject nextSelected;
         //check if index + 1 is bigger than list length
         if (index + 1 < players.Count)
             nextSelected = players[index + 1];

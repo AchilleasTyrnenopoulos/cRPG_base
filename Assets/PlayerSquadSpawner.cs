@@ -21,11 +21,7 @@ public class PlayerSquadSpawner : MonoBehaviour
         }
 
         Instantiate(playerSquadPrefab, instancePosition, Quaternion.identity);
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(this.gameObject);
     }
 }

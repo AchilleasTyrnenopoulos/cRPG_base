@@ -166,7 +166,7 @@ MonoBehaviour:
     m_Bits: 8964
   rightClickMask:
     serializedVersion: 2
-    m_Bits: 7428
+    m_Bits: 16132
 --- !u!114 &7171614568469905448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 7171614569826980720}
   m_Layer: 13
   m_Name: Prop Orientation
-  m_TagString: Untagged
+  m_TagString: Companion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 7171614570467302621}
   m_Layer: 13
   m_Name: 'BackSide '
-  m_TagString: Untagged
+  m_TagString: Companion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
