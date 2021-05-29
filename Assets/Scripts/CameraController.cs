@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        //target = GameObject.FindGameObjectWithTag("Player");
         mainCamera = Camera.main;
         speed = normalSpeed;
         rotationSpeed = normalRotationSpeed;
@@ -65,10 +65,12 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         //transform.rotation = Quaternion.Lerp(transform.rotation, currentRotation, Time.deltaTime * speed);
-
+        //keep camera height relevant to target
+        AdjustCameraHeight();
+        
         
 
-        if (lockedOnTarget)
+        if (lockedOnTarget && target != null)
             MoveToTarget();
     }
 
@@ -135,5 +137,11 @@ public class CameraController : MonoBehaviour
         currentRotation = Quaternion.Euler(0, 0, 0);
         
         this.transform.position = new Vector3(target.transform.position.x + 2, this.transform.position.y, target.transform.position.z + 78);
+        AdjustCameraHeight();
+    }
+
+    private void AdjustCameraHeight()
+    {
+        this.transform.position = new Vector3(this.transform.position.x, target.transform.position.y + 60, this.transform.position.z);
     }
 }

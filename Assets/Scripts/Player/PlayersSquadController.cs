@@ -8,7 +8,10 @@ public class PlayersSquadController : MonoBehaviour
 
     public GameObject selectedPlayer;
 
-    public List<GameObject> players = new List<GameObject>();    
+    public List<GameObject> players = new List<GameObject>();
+
+    [SerializeField]
+    private GameObject playerPrefab;
 
     private void Awake()
     {
@@ -17,8 +20,10 @@ public class PlayersSquadController : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {
-        players.Add(GameObject.FindGameObjectWithTag("Player"));
+    {        
+        GameObject playerGO = Instantiate(playerPrefab, this.transform.position, Quaternion.identity);
+        playerGO.transform.parent = this.transform;
+        players.Add(playerGO);
 
         //for development/testing
         //later it will instantiate the companions

@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CameraController.instance.target = this.gameObject;
+
         playerId = this.gameObject.name;
         EventManager.instance.RightClick += RightMouseClick;
         EventManager.instance.LeftClick += LeftMouseClick;
@@ -42,8 +44,8 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         //load player position
-        if(GameData.instance.playerPosition != null)
-            this.transform.position = GameData.instance.playerPosition;
+        //if(GameData.instance.playerPosition != null)
+        //    this.transform.position = GameData.instance.playerPosition;
 
         print("playerScript started");
     }
