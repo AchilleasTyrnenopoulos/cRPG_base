@@ -35,7 +35,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CameraController.instance.target = this.gameObject;
+        //later check what the selected player is in GameData
+        if(this.CompareTag("Player"))
+            CameraController.instance.target = this.gameObject;
 
         playerId = this.gameObject.name;
         EventManager.instance.RightClick += RightMouseClick;
@@ -108,6 +110,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        else
+            Debug.LogError("something unexpexted is going on. . .");
     }
 
     public void RightMouseClick(string id)

@@ -132,7 +132,7 @@ public class CameraController : MonoBehaviour
             mainCamera.transform.RotateAround(target.transform.position, Vector3.up, -rotationSpeed * Time.deltaTime);
     }       
 
-    private void MoveToTarget()
+    public void MoveToTarget()
     {
         currentRotation = Quaternion.Euler(0, 0, 0);
         

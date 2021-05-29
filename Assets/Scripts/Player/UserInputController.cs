@@ -67,6 +67,13 @@ public class UserInputController : MonoBehaviour
         }
         #endregion
 
+        //tab
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            PlayersSquadController.instance.ChangeSelectedPlayer();
+        }
+
+        //not working currently for companions
         //left click
         if (Input.GetMouseButtonDown(0))
         {
