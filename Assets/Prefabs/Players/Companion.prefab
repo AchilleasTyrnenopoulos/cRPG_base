@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1350554267757453276}
   m_Layer: 13
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Companion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

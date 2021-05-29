@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void LeftMouseClick(string id)
-    {
+    {        
         if (id == playerId)
         {
             //Vector3 clickPos;
@@ -88,30 +88,34 @@ public class PlayerController : MonoBehaviour
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 1000, leftClickMask))
-            {
+            {                
                 Collider hitCollider = hit.collider;
-                GameObject hitColliderGO = hit.collider.gameObject;
+                GameObject hitColliderGO = hit.collider.gameObject.transform.parent.gameObject;
 
                 string tag = hitCollider.tag;
                 switch (tag)
                 {
                     case ("Player"):
+                        print("player selected.");
                         DeselectAllPlayers();
                         PlayersSquadController.instance.selectedPlayer = hitColliderGO;
                         hitColliderGO.GetComponent<PlayerController>().selected = true;
                         CameraController.instance.target = hitColliderGO;
+                        CameraController.instance.MoveToTarget();
                         break;
                     case ("Companion"):
+                        print("companion selected.");
                         DeselectAllPlayers();
                         PlayersSquadController.instance.selectedPlayer = hitColliderGO;
                         hitColliderGO.GetComponent<PlayerController>().selected = true;
                         CameraController.instance.target = hitColliderGO;
+                        CameraController.instance.MoveToTarget();
                         break;
                 }
             }
         }
-        else
-            Debug.LogError("something unexpexted is going on. . .");
+        //else
+        //    Debug.LogError("something unexpexted is going on. . .");
     }
 
     public void RightMouseClick(string id)
@@ -186,7 +190,7 @@ public class PlayerController : MonoBehaviour
 
     public void DeselectAllPlayers()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        List<GameObject> players = PlayersSquadController.instance.players;
         foreach (GameObject player in players)
         {
             player.GetComponent<PlayerController>().selected = false;

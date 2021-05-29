@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8701458731998408053}
   m_Layer: 9
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   playerHealthScript: {fileID: 7506847152528799061}
   leftClickMask:
     serializedVersion: 2
-    m_Bits: 772
+    m_Bits: 8964
   rightClickMask:
     serializedVersion: 2
     m_Bits: 7428
