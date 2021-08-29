@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Humanoid
 {
     #region Variables
     //public static PlayerController instance;
@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     internal PlayerHealth playerHealthScript;
 
-    private NavMeshAgent agent;
+    
     [SerializeField]
     LayerMask leftClickMask;
     [SerializeField]

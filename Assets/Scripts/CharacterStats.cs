@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStats 
+public interface CharacterStats 
 {
-    public int level = 1;
-
-    public int strength = 10;      //baseMeleeDmg, maxHealth, maxInventory
-    public int perception = 10;    //accuracy, baseDefence, maxVisibleRange, baseAtk
-    public int endurance = 10;     //maxHealth, maxInventory, energyRegenRate 
-    public int charisma = 10;      //speech, linguistics 
-    public int intelligense = 10;  //spells/tech attacks, medicine (natural intel), craftmanship (math intel),   
-    public int agility = 10;       //moveSpeed, angularSpeed, attackSpeed, baseDefense
-    public int luck = 5;           //critical
+    
+    Value<int> Level { get; set; }
+    
+    int Strength { get; set; }      //baseMeleeDmg, maxHealth, maxInventory
+    int Perception { get; set; }    //accuracy, baseDefence, maxVisibleRange, baseAtk
+    int Endurance { get; set; }     //maxHealth, maxInventory, energyRegenRate 
+    int Charisma { get; set; }      //speech, linguistics 
+    int Intelligense { get; set; }  //spells/tech attacks, medicine (natural intel), craftmanship (math intel),   
+    int Agility { get; set; }       //moveSpeed, angularSpeed, attackSpeed, baseDefense
+                                           //public int Luck = 5;           //critical
 
     //STR
     //baseMeleeDamage = strength
@@ -41,7 +42,7 @@ public class CharacterStats
     //moveSpeed = agility / 10
     //angular speed = agility * 36
     //attackSpeed = agility / 10
-    
+
     //LUCK
     //
 }
