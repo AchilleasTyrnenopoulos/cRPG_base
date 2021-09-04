@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 7171614568469905462}
   - component: {fileID: 7171614568469905448}
   - component: {fileID: 7171614568469905463}
+  - component: {fileID: 3239197014551147306}
   m_Layer: 13
   m_Name: Companion
   m_TagString: Companion
@@ -158,9 +159,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerId: 
+  agent: {fileID: 0}
   target: {fileID: 0}
   selected: 0
   playerHealthScript: {fileID: 7171614568469905448}
+  playerStats: {fileID: 0}
   leftClickMask:
     serializedVersion: 2
     m_Bits: 8964
@@ -202,6 +205,62 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3239197014551147306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7171614568469905456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9ef3c27a341eba46b2f1dbf125cd516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  strength:
+    baseValue: 0
+  agility:
+    baseValue: 0
+  intelligense:
+    baseValue: 0
+  endurance:
+    baseValue: 0
+  focus:
+    baseValue: 0
+  charisma:
+    baseValue: 0
+  meleeAtk:
+    baseValue: 0
+  meleeDmg:
+    baseValue: 0
+  inventory:
+    baseValue: 0
+  maxHealth: 0
+  intimidation: 0
+  moveSpeed:
+    baseValue: 0
+  atkSpeed:
+    baseValue: 0
+  reflexes:
+    baseValue: 0
+  sneak:
+    baseValue: 0
+  dmgReduction:
+    baseValue: 0
+  resistance:
+    baseValue: 0
+  healthRegen:
+    baseValue: 0
+  rangedAtk:
+    baseValue: 0
+  sightRange:
+    baseValue: 0
+  criticalChance:
+    baseValue: 0
+  sense:
+    baseValue: 0
+  speech:
+    baseValue: 0
 --- !u!1 &7171614569826980734
 GameObject:
   m_ObjectHideFlags: 0

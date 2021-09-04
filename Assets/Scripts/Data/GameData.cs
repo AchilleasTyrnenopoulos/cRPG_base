@@ -11,6 +11,13 @@ public class GameData : MonoBehaviour
     public Vector3 playerPosition;    
 
     [Header("Game Data")]
+    public int strength;
+    public int agility;
+    public int intelligense;
+    public int focus;
+    public int endurance;
+    public int charisma;
+
     public List<string> enteredScenes = new List<string>();
     public bool cameraLockedOnTarget = false;
     public List<GameObject> companions = new List<GameObject>();

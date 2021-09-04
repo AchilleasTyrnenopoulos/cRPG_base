@@ -1,27 +1,36 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PlayerController : Humanoid
+public class PlayerController : MonoBehaviour
 {
     #region Variables
     //public static PlayerController instance;
 
     public string playerId;
 
+    public NavMeshAgent agent;
+
     public GameObject target;
-    
+
     public bool selected;
 
     [SerializeField]
     internal PlayerHealth playerHealthScript;
+    [SerializeField]
+    internal CharacterStats playerStats;
 
-    
+
     [SerializeField]
     LayerMask leftClickMask;
     [SerializeField]
     LayerMask rightClickMask;
+
+    public event Action<string> LeftClick;
+
+    public event Action<string> RightClick;
 
     #endregion
 
@@ -36,12 +45,14 @@ public class PlayerController : Humanoid
     void Start()
     {
         //later check what the selected player is in GameData
-        if(this.CompareTag("Player"))
+        if (this.CompareTag(Tags.player))
+        {
             CameraController.instance.target = this.gameObject;
+        }
 
         playerId = this.gameObject.name;
-        EventManager.instance.RightClick += RightMouseClick;
-        EventManager.instance.LeftClick += LeftMouseClick;
+        RightClick += RightMouseClick;
+        LeftClick += LeftMouseClick;
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -55,7 +66,7 @@ public class PlayerController : Humanoid
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     #region Methods
@@ -70,7 +81,7 @@ public class PlayerController : Humanoid
     public void Move(Vector3 pos, float agentStopDistance)
     {
         agent.stoppingDistance = agentStopDistance;
-        agent.SetDestination(pos);        
+        agent.SetDestination(pos);
     }
     public void Move(GameObject target, float agentStopDistance)
     {
@@ -79,7 +90,7 @@ public class PlayerController : Humanoid
     }
 
     public void LeftMouseClick(string id)
-    {        
+    {
         if (id == playerId)
         {
             //Vector3 clickPos;
@@ -88,14 +99,14 @@ public class PlayerController : Humanoid
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 1000, leftClickMask))
-            {                
+            {
                 Collider hitCollider = hit.collider;
                 GameObject hitColliderGO = hit.collider.gameObject.transform.parent.gameObject;
 
                 string tag = hitCollider.tag;
                 switch (tag)
                 {
-                    case ("Player"):
+                    case (Tags.player):
                         print("player selected.");
                         DeselectAllPlayers();
                         PlayersSquadController.instance.selectedPlayer = hitColliderGO;
@@ -134,7 +145,7 @@ public class PlayerController : Humanoid
                 string tag = hitCollider.tag;
                 switch (tag)
                 {
-                    case "Ground":
+                    case Tags.ground:
                         target = null;
                         clickPos = hit.point;
 
@@ -142,19 +153,19 @@ public class PlayerController : Humanoid
 
                         Move(clickPos, 0f);
                         break;
-                    case "Companion":
+                    case Tags.companion:
                         target = hitCollider.transform.parent.gameObject;
                         print(target.name);
                         Move(target);
                         break;
-                    case "NPC":
+                    case Tags.npc:
                         target = hitCollider.gameObject;
 
                         print(hitColliderGO.name);
 
                         Move(target, 2f);
                         break;
-                    case "Enemy":
+                    case Tags.enemy:
                         //clickPos = hit.point;
                         target = hitCollider.gameObject;
 
@@ -178,11 +189,11 @@ public class PlayerController : Humanoid
                             print("attack");
                         }
                         break;
-                    case "SceneTransition":
+                    case Tags.sceneTransition:
                         target = hitColliderGO;
                         Move(target);
                         break;
-                    case "Ignore Raycast":
+                    case Tags.ignoreRaycast:
                         break;
                     default:
                         Debug.LogError("Tag for specific layer has not been assigned.");
@@ -207,8 +218,17 @@ public class PlayerController : Humanoid
     private void OnDisable()
     {
         //print("Disabled");
-        EventManager.instance.RightClick -= RightMouseClick;
-        EventManager.instance.LeftClick -= LeftMouseClick;
+        RightClick -= RightMouseClick;
+        LeftClick -= LeftMouseClick;
     }
 
+    public void OnLeftClick(string id)
+    {
+        LeftClick?.Invoke(id);
+    }
+
+    public void OnRightClick(string id)
+    {
+        RightClick?.Invoke(id);
+    }
 }

@@ -3,38 +3,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stat<T>
-{    
+[System.Serializable]
+public class Stat
+{
+    [SerializeField]
+    private int baseValue;
 
-    public float BaseStatValue { get { return m_BaseStatValue; }  }
-    private float m_BaseStatValue;
-
-    public List<StatModifier> statModifiers;
-
-    public Value<float> Value { get { return CalculateFinalValue(); } }
-
-    public void AddModifier(StatModifier mod)
+    private List<int> modifiers = new List<int>();
+    public int GetValue()
     {
-        statModifiers.Add(mod);
+        int finalValue = baseValue;
+
+        //add modifiers
+        modifiers.ForEach(m => finalValue += m);
+
+        return finalValue;
     }
 
-    public bool RemoveModifier(StatModifier mod)
+    public void SetBaseValue(int value)
     {
-        return statModifiers.Remove(mod);
+        baseValue = value;
     }
 
-    private Value<float> CalculateFinalValue()
+    public void AddModifier(int modifier)
     {
-        float finalValue = m_BaseStatValue;
-
-        for (int i = 0; i < statModifiers.Count; i++)
-        {
-            finalValue += statModifiers[i].StatModValue; ;
-        }
-        // Rounding gets around dumb float calculation errors (like getting 12.0001f, instead of 12f)
-        // 4 significant digits is usually precise enough, but feel free to change this to fit your needs
-        return new Value<float>((float)Math.Round(finalValue, 4));
+        if (modifier != 0)
+            modifiers.Add(modifier);
     }
 
-
+    public void RemoveModifier(int modifier)
+    {
+        if (modifier != 0)
+            modifiers.Remove(modifier);
+    }
 }
