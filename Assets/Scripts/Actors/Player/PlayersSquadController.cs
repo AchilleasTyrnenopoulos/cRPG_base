@@ -79,6 +79,6 @@ public class PlayersSquadController : MonoBehaviour
        
         //change camera focus
         CameraController.instance.target = nextSelected;
-        CameraController.instance.MoveToTarget();
+        CameraController.instance.FollowTarget();
     }
 }

@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
                         PlayersSquadController.instance.selectedPlayer = hitColliderGO;
                         hitColliderGO.GetComponent<PlayerController>().selected = true;
                         CameraController.instance.target = hitColliderGO;
-                        CameraController.instance.MoveToTarget();
+                        CameraController.instance.FollowTarget();
                         break;
                     case ("Companion"):
                         print("companion selected.");
@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
                         PlayersSquadController.instance.selectedPlayer = hitColliderGO;
                         hitColliderGO.GetComponent<PlayerController>().selected = true;
                         CameraController.instance.target = hitColliderGO;
-                        CameraController.instance.MoveToTarget();
+                        CameraController.instance.FollowTarget();
                         break;
                 }
             }

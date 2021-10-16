@@ -15,6 +15,16 @@ public class CameraController : MonoBehaviour
     Camera mainCamera;
     [SerializeField]
     GameObject forwardDirection;
+    [SerializeField]
+    private GameObject anchor;
+
+    [Header("POSITIONING")]
+    [SerializeField]
+    private float xOffset;
+    [SerializeField]
+    private float height;
+    [SerializeField]
+    private float zOffset;
 
     [Header("MOVEMENT")]
     [SerializeField]
@@ -53,6 +63,10 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //positioning
+        cameraGO.transform.position = new Vector3(xOffset, height, zOffset);
+        anchor.transform.localPosition = new Vector3(xOffset, -height, zOffset);
+
         //target = GameObject.FindGameObjectWithTag("Player");
         mainCamera = Camera.main;
         speed = normalSpeed;
@@ -72,7 +86,7 @@ public class CameraController : MonoBehaviour
         
 
         if (lockedOnTarget && target != null)
-            MoveToTarget();
+            FollowTarget();
     }
 
     public void MoveCamera(float horiMove, float vertMove)
@@ -107,13 +121,13 @@ public class CameraController : MonoBehaviour
     public void CameraZoom(float zoomAmount)
     {
         if (zoomAmount > 0 && currentZoom <= maxZoom)
-            currentZoom += Time.deltaTime;
+            currentZoom += Time.fixedDeltaTime;
         else if (zoomAmount < 0 && currentZoom >= minZoom)
-            currentZoom -= Time.deltaTime;
+            currentZoom -= Time.fixedDeltaTime;
 
         if (currentZoom < maxZoom && currentZoom > minZoom)
         {
-            float currentZoom = zoomAmount * zoomSpeed * Time.deltaTime;
+            float currentZoom = zoomAmount * zoomSpeed * Time.fixedDeltaTime;
 
             mainCamera.gameObject.transform.Translate(0, 0, currentZoom, Space.Self);
         }
@@ -122,27 +136,28 @@ public class CameraController : MonoBehaviour
 
     public void RotateCameraLeft(bool left)
     {
-        //if(left)
-        //    currentRotation *= Quaternion.Euler(Vector3.up * -rotationSpeed);
-        //else
-        //    currentRotation *= Quaternion.Euler(Vector3.up * rotationSpeed);
+        Vector3 targetPos;
+        if (lockedOnTarget)
+            targetPos = target.transform.position;
+        else
+            targetPos = anchor.transform.position;
 
         if(left)
-            mainCamera.transform.RotateAround(target.transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
+            mainCamera.transform.RotateAround(targetPos, Vector3.up, rotationSpeed * Time.fixedDeltaTime);
         else
-            mainCamera.transform.RotateAround(target.transform.position, Vector3.up, -rotationSpeed * Time.deltaTime);
+            mainCamera.transform.RotateAround(targetPos, Vector3.up, -rotationSpeed * Time.fixedDeltaTime);
     }       
 
-    public void MoveToTarget()
+    public void FollowTarget()
     {
         currentRotation = Quaternion.Euler(0, 0, 0);
         
-        this.transform.position = new Vector3(target.transform.position.x + 2, this.transform.position.y, target.transform.position.z + 78);
+        this.transform.position = new Vector3(target.transform.position.x - xOffset, this.transform.position.y, target.transform.position.z - zOffset);
         AdjustCameraHeight();
     }
 
     private void AdjustCameraHeight()
     {
-        this.transform.position = new Vector3(this.transform.position.x, target.transform.position.y + 60, this.transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x, target.transform.position.y + height, this.transform.position.z);
     }
 }
